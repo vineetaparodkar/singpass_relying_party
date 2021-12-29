@@ -1,0 +1,53 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.singpass.relyingparty'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = '1.8'
+
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// https://mvnrepository.com/artifact/org.json/json
+	implementation group: 'org.json', name: 'json', version: '20210307'
+
+	//Java library for Javascript Object Signing and Encryption (JOSE) and JSON Web Tokens (JWT)
+	implementation "com.nimbusds:nimbus-jose-jwt:7.8.1"
+	implementation 'com.auth0:jwks-rsa:0.19.0'
+
+	//FileUtils
+	implementation 'commons-io:commons-io:2.11.0'
+
+	//Swagger UI
+	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+	implementation("io.springfox:springfox-swagger2:2.9.2") {
+		exclude module: 'swagger-annotations'
+		exclude module: 'swagger-models'
+	}
+	implementation("io.swagger:swagger-annotations:1.5.21")
+	implementation("io.swagger:swagger-models:1.5.21")
+
+	//Jackson dependency
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.0'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.mockito:mockito-inline' //added to handle testing of final classes
+
+
+
+}
+
+test {
+	useJUnitPlatform()
+}
