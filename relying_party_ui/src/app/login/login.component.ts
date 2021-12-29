@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { SINGPASS_WEB_REDIRECT_URL,CLIENT_ID } from '../config/config'
 
+
+/**
+ *
+ * Relying party login component which displays Singpass QR code to be scanned with singpass app
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -32,8 +38,8 @@ export class LoginComponent implements OnInit {
     const initAuthSessionResponse = NDI.initAuthSession(
       'ndi-qr',
       {
-        clientId: 'xxx', //replace with your client id
-        redirectUri: 'xxx', //replace with your redirect uri
+        clientId: CLIENT_ID, 
+        redirectUri: SINGPASS_WEB_REDIRECT_URL, 
         scope: 'openid',
         responseType: 'code'
       },

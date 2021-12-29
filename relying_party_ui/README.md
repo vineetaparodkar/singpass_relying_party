@@ -21,7 +21,7 @@ Additional Pre-requisites for developement mode deployment:
 
 ### Config Update  
 
-- Update/Add config in enviroment.prod.ts `singpass_relying_party\relying_party_ui\src\environments\environment.prod.ts`
+- Update/Add config in config.js file located at `singpass_relying_party/relying_party_ui/src/app/config/config.js`
 
 - Update server port in package.json file. 
 
