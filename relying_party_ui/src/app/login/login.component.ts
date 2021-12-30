@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SINGPASS_WEB_REDIRECT_URL,CLIENT_ID } from '../config/config'
+import { SINGPASS_WEB_REDIRECT_URL, CLIENT_ID } from '../config/config'
 
 
 /**
@@ -13,37 +13,37 @@ import { SINGPASS_WEB_REDIRECT_URL,CLIENT_ID } from '../config/config'
 })
 export class LoginComponent implements OnInit {
 
-  constructor() {
+  constructor() {}
 
+  ngOnInit(): void {
     this.onsubmit();
   }
 
-  ngOnInit(): void {
+  authParamsSupplier = () => {
+    let nonce = Math.random().toString(36).substr(2, 5);
+    let state = Math.random().toString(36).substr(2, 5);
+    let param = {
+      state: nonce,
+      nonce: state
+    };
+    return param
   }
 
-  onError = (errorId: any, message: any) => {
+  onError = (errorId, message) => {
     console.log("qr code load error", errorId, message)
   }
 
-
   onsubmit() {
-    let nonce = Math.random().toString(36).substr(2, 5);
-    let state = Math.random().toString(36).substr(2, 5);
-
-    let authParamsSupplier = {
-      state: state,
-      nonce: nonce
-    }
-
+  
     const initAuthSessionResponse = NDI.initAuthSession(
       'ndi-qr',
       {
-        clientId: CLIENT_ID, 
-        redirectUri: SINGPASS_WEB_REDIRECT_URL, 
+        clientId: CLIENT_ID,
+        redirectUri: SINGPASS_WEB_REDIRECT_URL,
         scope: 'openid',
         responseType: 'code'
       },
-      authParamsSupplier,
+      this.authParamsSupplier,
       this.onError
     );
     console.log("initAuthSessionResponse:", initAuthSessionResponse)
